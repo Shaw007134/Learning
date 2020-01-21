@@ -102,3 +102,28 @@ var person = {
   name: "zsy",
   friends: ["ab", "bc"]
 };
+
+//寄生组合继承
+function inheritPrototype(subType, superType) {
+  var prototype = object(superType.protoType); //创建超类型原型的副本
+  prototype.constructor = subType; // 为创建的副本添加constructor属性
+  subType.protoType = prototype; // 将新创建的对象赋值给子类型的原型
+}
+function SuperType(name) {
+  this.name = name;
+  this.colors = ["read", "blue", "green"];
+}
+
+SuperType.protoType.sayName = function() {
+  console.log(this.name);
+}
+
+function SubType(name, age) {
+  SuperType.call(this, name);
+  this.age = age;
+}
+
+inheritPrototype(SubType, SuperType);
+SubType.prototype.sayAge = function(){
+  console.log(this.age);
+}
