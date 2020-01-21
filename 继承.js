@@ -22,3 +22,27 @@ console.log(instance.getSuperValue); // true
 console.log(instance instanceof Object); //true
 console.log(instance instanceof SuperType); //true
 console.log(instance instanceof SubType); //true
+
+
+// 借用构造函数
+function SuperType(name) {
+  this.colors = ["red", "blue", "green"];
+  this.name = name;
+}
+
+SuperType.prototype.print = function () {
+  this.colors.forEach(e => console.log(e));
+}
+
+function SubType() {
+  SuperType.call(this, "subColor");
+  this.size = 100;
+}
+
+var instance1 = new SubType();
+instance1.colors.push("black");
+console.log(instance1.colors);
+console.log(instance1.size);
+var instance2 = new SubType();
+console.log(instance2.colors);
+instance2.print();
