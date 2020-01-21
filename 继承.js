@@ -71,3 +71,20 @@ SubType.prototype.saySize = function () {
 
 var instance1 = new SubType("instance1", 100);
 var instance2 = new SubType("instance2", 50);
+
+//原型式继承
+var person = {
+  name: "zsy",
+  friends: ["ab", "bc", "cd"]
+}
+
+var Person1 = Object.create(person);
+Person1.name = "shaw";
+Person1.friends.push("bob");
+var Person2 = Object.create(person, {
+  name: {
+    value: "test"
+  }
+});
+
+console.log(Person2.name)
