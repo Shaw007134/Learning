@@ -63,7 +63,7 @@ function SubType(name, size) {
   this.size = size;
 }
 
-SubType.prototype = new SuperType();
+SubType.prototype = new SuperType(); 
 SubType.prototype.constructor = SubType;
 SubType.prototype.saySize = function () {
   console.log(this.size);
@@ -88,3 +88,17 @@ var Person2 = Object.create(person, {
 });
 
 console.log(Person2.name)
+
+//寄生式继承
+function createAnother(original) {
+  var clone = object(original);
+  clone.sayHi = function () {
+    console.log("Hi");
+  };
+  return clone;
+}
+
+var person = {
+  name: "zsy",
+  friends: ["ab", "bc"]
+};
