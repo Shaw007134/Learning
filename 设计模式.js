@@ -67,3 +67,26 @@ target.fire({
   type: "message",
   message: "Hello World!"
 });
+
+function Person(name, age){
+  EventTarget.call(this);
+  this.name = name;
+  this.age = age;
+}
+
+Person.prototype = new EventTarget();
+Person.prototype.constructor = Person;
+Person.prototype.say = function(message) {
+  this.fire({type: "message", message: message});
+};
+
+function handleMessage(event) {
+  console.log(event.target.name + " says: " + event.message);
+}
+
+// 创建新person
+var person = new Person("zsy", 25);
+// 添加一个事件处理程序
+person.addHandler("message", handleMessage);
+// 在该对象上调用1个方法，它触发消息事件
+person.say("Happy new year 2020")
